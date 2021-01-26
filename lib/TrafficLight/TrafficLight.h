@@ -21,6 +21,7 @@ class TrafficLight
     int _greenLedPin;
     int _currentPhase;
     unsigned long _timer = 0;
+    bool _isMaintenance = false;
 
 public:
     const static int OFF;
@@ -43,6 +44,7 @@ public:
     void switchToPhase(int phase);
     void nextPhase();
     void switchToMaintenance();
+    void switchToNormalOperations();
 
 private:
 };

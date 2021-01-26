@@ -92,5 +92,9 @@ void TrafficLight::nextPhase() {
  * 
  */
 void TrafficLight::switchToMaintenance() {
+    _isMaintenance = true;
+}
 
+void TrafficLight::switchToNormalOperations() {
+    _isMaintenance = false;
 }
