@@ -65,7 +65,7 @@ private:
     int _getNextPhase(unsigned int phase);
     int _currentMode;
     int *_program;
-    void TrafficLightController::_setNewTimer(int phaseDuration);
+    void _setNewTimer(int phaseDuration);
 };
 
 #endif
