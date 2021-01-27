@@ -14,7 +14,8 @@ TrafficLightController tlControl(&ampel1, &ampel2);
  * @brief Define PIN for button.
  * 
  */
-const int buttonPIN = 13;
+const int yellowButtonPIN = 13;
+const int redButtonPIN = 12;
 
 /**
  * @brief Initialize stuff.
@@ -23,7 +24,8 @@ const int buttonPIN = 13;
 void setup()
 {
   // put your setup code here, to run once:
-  pinMode(buttonPIN, INPUT_PULLUP);
+  pinMode(yellowButtonPIN, INPUT_PULLUP);
+  pinMode(redButtonPIN, INPUT_PULLUP);
   Serial.begin(9600);
   tlControl.switchToNormal();
 }
@@ -36,7 +38,7 @@ void loop()
 {
   // put your main code here, to run repeatedly:
 
-  if (digitalRead(buttonPIN) == LOW)
+  if (digitalRead(yellowButtonPIN) == LOW)
   {
     if (tlControl.mode() == TrafficLightController::NORMAL)
     {
@@ -46,7 +48,20 @@ void loop()
     {
       tlControl.switchToNormal();
     }
-    while (digitalRead(buttonPIN) == LOW); // wait until button no longer pressed
+    while (digitalRead(yellowButtonPIN) == LOW); // wait until button no longer pressed
+  }
+
+  if (digitalRead(redButtonPIN) == LOW)
+  {
+    if (tlControl.mode() != TrafficLightController::OFF)
+    {
+      tlControl.switchOff();
+    }
+    else
+    {
+      tlControl.switchToNormal();
+    }
+    while (digitalRead(redButtonPIN) == LOW); // wait until button no longer pressed
   }
 
   tlControl.loop();
