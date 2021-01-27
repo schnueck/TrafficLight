@@ -35,8 +35,8 @@ class TrafficLightController
     byte _currentPhase = 0;
 
     int _maintenanceMode[2][3] = {
-        {1, TrafficLight::YELLOW, TrafficLight::OFF},
-        {1, TrafficLight::OFF, TrafficLight::YELLOW},
+        {1, TrafficLight::YELLOW, TrafficLight::YELLOW},
+        {1, TrafficLight::OFF, TrafficLight::OFF},
     };
 
     unsigned long _timer = 0;
@@ -52,6 +52,7 @@ public:
    * 
    */
     TrafficLightController(TrafficLight *tl1, TrafficLight *tl2);
+    void setProgram(int program[][3]);
     void loop();
     void switchToMaintenance();
     void switchToNormal();
@@ -63,6 +64,8 @@ private:
     void _maintenanceLoop();
     int _getNextPhase(unsigned int phase);
     int _currentMode;
+    int *_program;
+    void TrafficLightController::_setNewTimer(int phaseDuration);
 };
 
 #endif

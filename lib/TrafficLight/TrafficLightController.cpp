@@ -25,9 +25,11 @@ const int TrafficLightController::MAINTENANCE = 2;
 TrafficLightController::TrafficLightController(TrafficLight *tl1, TrafficLight *tl2) {
     _trafficLights[0] = tl1;
     _trafficLights[1] = tl2;
-    _trafficLights[0]->switchToPhase(TrafficLight::OFF);
-    _trafficLights[1]->switchToPhase(TrafficLight::OFF);
-    _currentMode = TrafficLightController::OFF;
+    switchOff();
+}
+
+void TrafficLightController::setProgram(int program[][3]){
+   
 }
 
 /**
@@ -39,7 +41,6 @@ void TrafficLightController::loop(){
     switch (_currentMode) {
         case TrafficLightController::OFF:
             break;
-        
         case TrafficLightController::MAINTENANCE:
             _maintenanceLoop();
             break;
@@ -58,11 +59,11 @@ void TrafficLightController::_standardLoop() {
         _currentPhase = _getNextPhase(_currentPhase);
 
         for (int i = 0; i < MAX_TRAFFIC_LIGHTS; i++) {
-            _trafficLights[i]->switchToPhase(_phases[_currentPhase][i+1]);
+            _trafficLights[i]->switchToSignal(_phases[_currentPhase][i+1]);
         }
 
         // set new timer, add duration of curren phase to millis()
-        _timer = millis() + (_phases[_currentPhase][0] * 1000);
+        _setNewTimer(_phases[_currentPhase][0]);
     }
 }
 
@@ -75,11 +76,11 @@ void TrafficLightController::_maintenanceLoop() {
         _currentPhase = ++_currentPhase % 2;
 
         for (int i = 0; i < MAX_TRAFFIC_LIGHTS; i++) {
-            _trafficLights[i]->switchToPhase(_maintenanceMode[_currentPhase][i+1]);
+            _trafficLights[i]->switchToSignal(_maintenanceMode[_currentPhase][i+1]);
         }
 
         // set new timer, add duration of curren phase to millis()
-        _timer = millis() + (_maintenanceMode[_currentPhase][0] * 1000);
+        _setNewTimer(_maintenanceMode[_currentPhase][0]);
     }
 }
 
@@ -109,8 +110,9 @@ void TrafficLightController::switchToMaintenance() {
 void TrafficLightController::switchOff() {
     _currentMode = TrafficLightController::OFF;
     _timer = 0;
-    _trafficLights[0]->switchToPhase(TrafficLight::OFF);
-    _trafficLights[1]->switchToPhase(TrafficLight::OFF);
+    for (int i = 0; i < MAX_TRAFFIC_LIGHTS; i++) {
+        _trafficLights[i]->switchToSignal(TrafficLight::OFF);
+    }
 }
 
 int TrafficLightController::mode() {
@@ -129,4 +131,13 @@ int TrafficLightController::_getNextPhase(unsigned int phase) {
         phase = 1;
     }
     return phase;
+}
+
+/**
+ * @brief Set new timer, add duration of current phase to millis()
+ * 
+ * @param phaseDuration in seconds
+ */
+void TrafficLightController::_setNewTimer(int phaseDuration) {
+        _timer = millis() + (phaseDuration * 1000);
 }

@@ -10,6 +10,18 @@ TrafficLight ampel1 = TrafficLight(4, 5, 6);
 TrafficLight ampel2 = TrafficLight(8, 9, 10);
 TrafficLightController tlControl(&ampel1, &ampel2);
 
+int program[9][3] = {
+    {0, TrafficLight::OFF, TrafficLight::OFF},
+    {2, TrafficLight::RED, TrafficLight::RED},
+    {1, TrafficLight::RED_YELLOW, TrafficLight::RED},
+    {8, TrafficLight::GREEN, TrafficLight::RED},
+    {2, TrafficLight::YELLOW, TrafficLight::RED},
+    {2, TrafficLight::RED, TrafficLight::RED},
+    {1, TrafficLight::RED, TrafficLight::RED_YELLOW},
+    {8, TrafficLight::RED, TrafficLight::GREEN},
+    {2, TrafficLight::RED, TrafficLight::YELLOW}
+};
+
 /**
  * @brief Define PIN for button.
  * 
@@ -27,6 +39,7 @@ void setup()
   pinMode(yellowButtonPIN, INPUT_PULLUP);
   pinMode(redButtonPIN, INPUT_PULLUP);
   Serial.begin(9600);
+  tlControl.setProgram(program);
   tlControl.switchToNormal();
 }
 
