@@ -12,15 +12,15 @@
 #include "Arduino.h"
 #include <TrafficLight.h>
 
+// define traffic light signals
 const int TrafficLight::OFF = 0;
 const int TrafficLight::RED = 1;
 const int TrafficLight::RED_YELLOW = 2;
 const int TrafficLight::GREEN = 3;
 const int TrafficLight::YELLOW = 4;
-const int TrafficLight::MAINTENANCE = 5; // yellow blinking light
 
 /**
- * @brief Construct a new TrafficLight object
+ * @brief Construct a new TrafficLight object that is in state OFF.
  * 
  * @param red       PIN to which red LED is connected.
  * @param yellow    PIN to which yellow LED is connected.
@@ -35,18 +35,17 @@ TrafficLight::TrafficLight(int red, int yellow, int green) {
     pinMode(_yellowLedPin, OUTPUT);
     pinMode(_greenLedPin, OUTPUT);
 
-    this->switchToPhase(TrafficLight::RED);
+    this->switchToSignal(TrafficLight::OFF);
 }
 
 /**
- * @brief Switches to a specific traffic light phase
+ * @brief Switches to a specific traffic light signal
  * 
- * @param phase ID of a phase. Use one out of TrafficLight::RED, TrafficLight::YELLOW,
+ * @param signal ID of a signal. Use one out of TrafficLight::RED, TrafficLight::YELLOW,
  * TrafficLight::GREEN, TrafficLight::RED_YELLOW.
  */
-void TrafficLight::switchToPhase(int phase) {
-    _currentPhase = phase;
-    switch(phase) {
+void TrafficLight::switchToSignal(int signal) {
+    switch(signal) {
         case TrafficLight::OFF:
             digitalWrite(_redLedPin, LOW);
             digitalWrite(_yellowLedPin, LOW);
@@ -75,26 +74,3 @@ void TrafficLight::switchToPhase(int phase) {
     }
 }
 
-/**
- * @brief Switches TrafficLight to next phase.
- * 
- */
-void TrafficLight::nextPhase() {
-    if(_currentPhase >= TrafficLight::YELLOW) {
-        _currentPhase = TrafficLight::OFF;
-    }
-   
-    this->switchToPhase(_currentPhase + 1);
-}
-
-/**
- * @brief Sets TrafficLight into maintenance mode (yellow blinking);
- * 
- */
-void TrafficLight::switchToMaintenance() {
-    _isMaintenance = true;
-}
-
-void TrafficLight::switchToNormalOperations() {
-    _isMaintenance = false;
-}

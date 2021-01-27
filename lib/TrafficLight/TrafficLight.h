@@ -19,18 +19,14 @@ class TrafficLight
     int _redLedPin;
     int _yellowLedPin;
     int _greenLedPin;
-    int _currentPhase;
-    unsigned long _timer = 0;
-    bool _isMaintenance = false;
 
 public:
+    // declare traffic light signals
     const static int OFF;
     const static int RED;
     const static int YELLOW;
     const static int GREEN;
     const static int RED_YELLOW;
-    const static int MAINTENANCE;
-    const static int PHASES[4];
 
    /**
    * @brief Construct a new Traffic Light object
@@ -41,10 +37,7 @@ public:
    */
     TrafficLight(int red, int yellow, int green);
 
-    void switchToPhase(int phase);
-    void nextPhase();
-    void switchToMaintenance();
-    void switchToNormalOperations();
+    void switchToSignal(int signal);
 
 private:
 };
