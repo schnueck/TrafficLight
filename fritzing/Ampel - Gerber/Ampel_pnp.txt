@@ -4,7 +4,7 @@
 *eMail=
 *
 *Project=Ampel
-*Date=18:42:18
+*Date=19:38:35
 *CreatedBy=Fritzing 0.9.4.2019-12-01.CD-498-0-a1ffcea
 *
 *
@@ -13,10 +13,10 @@
 *Rotation in degree (0-360, math. pos.)
 *
 *No;Value;Package;X;Y;Rotation;Side;Name
-1;;5 mm [THT];7.32832;-29.3876;90;Bottom;LED3
-2;220;THT;4.0973;-16.6876;-90;Bottom;R1
-3;;THT;7.9073;-6.52756;90;Bottom;PINs
-4;100;THT;9.1773;-16.6876;-90;Bottom;R3
-5;220;THT;6.6373;-16.6876;-90;Bottom;R2
-6;;5 mm [THT];7.32832;-37.0076;90;Bottom;LED2
-7;;5 mm [THT];7.32832;-44.6276;90;Bottom;LED1
+1;100;THT;9.1773;-16.6876;-90;Bottom;R3
+2;;5 mm [THT];7.32832;-44.6276;90;Bottom;LED1
+3;220;THT;6.6373;-16.6876;-90;Bottom;R2
+4;220;THT;4.0973;-16.6876;-90;Bottom;R1
+5;;5 mm [THT];7.32832;-37.0076;90;Bottom;LED2
+6;;THT;7.9073;-6.52756;90;Bottom;PINs
+7;;5 mm [THT];7.32832;-29.3876;90;Bottom;LED3
