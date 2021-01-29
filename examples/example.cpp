@@ -1,5 +1,5 @@
 /**
- * @file   main.cpp
+ * @file   example.cpp
  * @author Thomas Schnuecker (thomas@schnuecker.de)
  * @brief  Example to show how to use traffic light controller to control
  * a set of traffic lights.

@@ -28,10 +28,6 @@ TrafficLightController::TrafficLightController(TrafficLight *tl1, TrafficLight *
     switchOff();
 }
 
-void TrafficLightController::setProgram(int program[][3]){
-   
-}
-
 /**
  * @brief TrafficLightController loop to be called within main loop.
  * This loop will check whether or not time is up for next traffic light 
@@ -58,6 +54,7 @@ void TrafficLightController::_standardLoop() {
     if (millis() > _timer) {
         _currentPhase = _getNextPhase(_currentPhase);
 
+        // toggle lights on each traffic light
         for (int i = 0; i < MAX_TRAFFIC_LIGHTS; i++) {
             _trafficLights[i]->switchToSignal(_phases[_currentPhase][i+1]);
         }
@@ -73,8 +70,10 @@ void TrafficLightController::_standardLoop() {
  */
 void TrafficLightController::_maintenanceLoop() {
     if (millis() > _timer) {
+        // switch between 0 and 1
         _currentPhase = ++_currentPhase % 2;
 
+        // turn each traffic lights YELLOW on/off
         for (int i = 0; i < MAX_TRAFFIC_LIGHTS; i++) {
             _trafficLights[i]->switchToSignal(_maintenanceMode[_currentPhase][i+1]);
         }
