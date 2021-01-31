@@ -1,0 +1,23 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=TrafficLightController
+*Date=20:25:17
+*CreatedBy=Fritzing 0.9.4.2019-12-01.CD-498-0-a1ffcea
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;THT;29.3429;-35.6407;90;Bottom;TL 3
+2;;jst-2-pth-ns;39.4821;-5.01995;0;Bottom;VIN
+3;;dipswitch-02;49.6629;-21.6707;0;Bottom;SW1
+4;;THT;49.6629;-10.2407;-90;Bottom;Maint.
+5;;THT;14.1029;-5.16074;90;Bottom;TL 1
+6;;THT;29.3429;-5.16074;90;Bottom;TL 2
+7;;THT;14.1029;-35.6407;90;Bottom;TL 4
+8;;;22.9845;-20.4007;90;Bottom;Arduino Nano
