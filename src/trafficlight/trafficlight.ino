@@ -19,18 +19,17 @@
  * @brief Instantiate two traffic light objects and provide PIN numbers.
  * 
  */
-TrafficLight tl1(2,3,4);  
-TrafficLight tl2(6,7,8);
-TrafficLight tl3(A0,A1,A2);
-TrafficLight tl4(A3,A4,A5);
-TrafficLightController tlControl(&tl1, &tl3);
+TrafficLight tl1(A2,A1,A0);
+TrafficLight tl2(A5,A4,A3);
+TrafficLight tl3(6,5,4);  
+TrafficLight tl4(10,9,8);
+TrafficLightController tlControl(&tl1, &tl2);
 
 /**
  * @brief Define PIN for button.
  * 
  */
-const int yellowButtonPIN = 11;
-const int redButtonPIN = 12;
+const int yellowButtonPIN = 7;
 
 /**
  * @brief Initialize stuff.
@@ -41,7 +40,6 @@ void setup()
   Serial.begin(9600);
   // put your setup code here, to run once:
   pinMode(yellowButtonPIN, INPUT_PULLUP);
-  pinMode(redButtonPIN, INPUT_PULLUP);
   tlControl.switchToNormal();
 }
 
@@ -66,22 +64,6 @@ void loop()
       tlControl.switchToNormal();
     }
     while (digitalRead(yellowButtonPIN) == LOW); // wait until button no longer pressed
-  }
-
-  // If RED button is pressed, switch traffic lights on/off.
-  if (digitalRead(redButtonPIN) == LOW)
-  {
-    if (tlControl.mode() != TrafficLightController::OFF)
-    {
-      Serial.println("Switching off.");
-      tlControl.switchOff();
-    }
-    else
-    {
-      Serial.println("Switching on.");
-      tlControl.switchToNormal();
-    }
-    while (digitalRead(redButtonPIN) == LOW); // wait until button no longer pressed
   }
 
   // Run TrafficLightController loop. This is needed for the controller to work.
